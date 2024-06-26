@@ -1,11 +1,11 @@
 <h1>Infinite List</h1>
 <main>
   <div class="collect-section">
-    <h2>1. Collect</h2>
+    <h2>Collect</h2>
 
     <form [formGroup]="form" (ngSubmit)="addTodo()">
       <input type="text" formControlName="title" tabindex="1">
-      <input [disabled]="form.invalid" type="submit" value="Add Idea">
+      <input [disabled]="form.invalid" type="submit" value="Add Idea" tabindex="2">
     </form>
     <ul>
       @for (todo of todos(); track todo.id) {
@@ -17,13 +17,13 @@
     </ul>
   </div>
   <div class="select-section">
-    <h2>2. Select</h2>
+    <h2>Select</h2>
     @if (reviewTodo(); as todo) {
     <div>
       <p>Do you want to do the following?</p>
       <h3>{{todo.title}}</h3>
-      <button (click)="schedule(todo.id)" class="schedule" tabindex="2">Yes</button>
-      <button (click)="postpone(todo.id)" class="postpone" tabindex="3">No</button>
+      <button (click)="schedule(todo.id)" class="schedule" tabindex="3">Yes</button>
+      <button (click)="postpone(todo.id)" class="postpone" tabindex="4">No</button>
     </div>
     }
     @else if(todos().length) {
@@ -43,7 +43,7 @@
 
   </div>
   <div class="review-section">
-    <h2>3. Do</h2>
+    <h2>Do</h2>
     @if (scheduledTodos().length) {
     <ul>
       @for (todo of scheduledTodos(); track todo.id) {

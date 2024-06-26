@@ -1,13 +1,33 @@
 :host {
     font-family: 'Courier New', Courier, monospace;
+    // font-family: 'Times New Roman', Times, serif;
 
     button,
     input[type="submit"] {
-        background-color: white;
         box-shadow: none;
-        border: 1px solid;
+
+        padding: 4px 8px;
 
         font-family: 'Courier New', Courier, monospace;
+
+        background-color: white;
+
+        border: 1px solid lightgrey;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: lightgrey;
+        }
+    }
+
+    input[type="text"] {
+        border: 1px solid lightgrey;
+    }
+
+
+    h1 {
+        color: darkgrey;
     }
 
     main {
@@ -17,14 +37,25 @@
 
         display: grid;
 
+        border-top: 1px solid lightgrey;
+
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        // gap: 16px;
 
         > div {
             padding: 32px;
-            background-color: antiquewhite;
 
             overflow-y: auto;
+
+            border-right: 1px solid lightgrey;
+
+            h2 {
+                color: grey;
+            }
+
+            li {
+                margin: 4px 0;
+            }
 
             &.collect-section {
                 form {
@@ -37,13 +68,23 @@
                     text-decoration: line-through;
                     opacity: 0.5;
                 }
+
+                // button {
+                //     border-color: lightcoral;
+                //     background-color: lightcoral;
+                // }
             }
 
             &.select-section {
                 div {
                     padding: 16px;
 
-                    border: 2px solid;
+                    // border: 2px solid blue;
+                    // box-shadow: 2px 2px blue;
+
+                    border: 2px solid grey;
+                    box-shadow: 2px 2px grey;
+
                     display: grid;
 
                     grid-template-areas:
@@ -62,19 +103,35 @@
 
                         text-align: center;
 
-                        &::before, &::after {
+                        &::before,
+                        &::after {
                             content: '"'
                         }
                     }
 
-                    .schedule {
-                        grid-area: c;
-                    }
+                    button {
+                        // border: 1px solid blue;
+                        // color: blue;
 
-                    .postpone {
-                        grid-area: d;
-                    }
+                        border: 1px solid grey;
 
+                        &.schedule {
+                            grid-area: c;
+
+                            font-weight: bold;
+                        }
+
+                        &.postpone {
+                            grid-area: d;
+
+                            font-weight: bold;
+                        }
+
+                        &:hover {
+                            background-color: grey;
+                            color: white;
+                        }
+                    }
                 }
 
                 ul {
