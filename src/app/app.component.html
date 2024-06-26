@@ -1,4 +1,23 @@
-<h1>Infinite List</h1>
+<header>
+  <h1>Infinite List</h1>
+  <input (change)="import($event)" type="file" id="file" accept=".json" class="import">
+  <label for="file" tabindex="0">Import Data</label>
+  <button (click)="showDialog(true)">Export Data</button>
+  <dialog #dialog>
+    <div>
+      <button autofocus (click)="showDialog(false)">Close</button>
+      <pre>{{exportData()}}</pre>
+      <button (click)="export()">Copy to clipboard</button>
+    </div>
+  </dialog>
+
+  <dialog #importDialog>
+    <div>
+      <button autofocus (click)="showDialog(false)">Close</button>
+      <button (click)="export()">Copy to clipboard</button>
+    </div>
+  </dialog>
+</header>
 <main>
   <div class="collect-section">
     <h2>Collect</h2>

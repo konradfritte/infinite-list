@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, ElementRef, computed, signal, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { openDB } from 'idb';
@@ -24,11 +24,14 @@ interface Todo {
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  dialog = viewChild<ElementRef>('dialog');
+  exportData = signal('');
+
   todos = signal<Todo[]>([]);
   todosForToday = signal<Todo[]>([]);
 
   scheduledTodos = computed(() => this.todos().filter(todo => todo.scheduled));
-  reviewTodo = computed(() => this.todosForToday()[0])
+  reviewTodo = computed(() => this.todosForToday()[0]);
 
   form = new FormGroup({
     title: new FormControl("", [Validators.required])
@@ -66,8 +69,6 @@ export class AppComponent {
     this.synchronizeWithDatabase();
 
     this.form.reset();
-
-    console.log(this.form);
   }
 
   async schedule(id: number) {
@@ -149,6 +150,55 @@ export class AppComponent {
     const store = tx.objectStore('todos');
 
     return await store.getAll();
+  }
+
+  async showDialog(state: boolean) {
+    const dialog = this.dialog()?.nativeElement;
+
+    if (!state) {
+      dialog.close();
+
+      return;
+    }
+
+    this.exportData.set(JSON.stringify(this.todos(), null, 2));
+
+    dialog.showModal();
+  }
+
+  async export() {
+    navigator.clipboard.writeText(this.exportData());
+  }
+
+  async import(event: any) {
+    const file: File = event.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const data = e.target?.result as string;
+
+      const todos: Todo[] = JSON.parse(data);
+
+      const tx = (await this.db).transaction('todos', 'readwrite');
+      const store = tx.objectStore('todos');
+
+      const requests = todos.map(todo => {
+        const { id, ...attributes } = todo;
+
+        return store.add(attributes);
+      });
+
+      await Promise.all(requests);
+
+      this.synchronizeWithDatabase();
+    }
+
+    reader.readAsText(file);
   }
 
   private async getTodosForToday() {
