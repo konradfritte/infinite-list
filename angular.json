@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angualar-18": {
+    "infinite-list": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angualar-18",
+            "outputPath": "dist/infinite-list",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angualar-18:build:production"
+              "buildTarget": "infinite-list:build:production"
             },
             "development": {
-              "buildTarget": "angualar-18:build:development"
+              "buildTarget": "infinite-list:build:development"
             }
           },
           "defaultConfiguration": "development"
