@@ -132,14 +132,12 @@ describe('TodoService', () => {
     });
   });
 
-
-
-  it('should postpone a to-do and persist it in the database', async () => {
+  it('should postpone a to-do and unschedule it', async () => {
     const id = await service.addTodo({ title: 'todo' }) as number;
 
-    await service.updateTodo(id, { reviewAt: new Date() });
+    await service.updateTodo(id, { reviewAt: new Date(), scheduled: true });
 
-    await service.postpone(id);
+    await service.postponeTodo(id);
 
     const todo = await service.getTodo(id);
 
@@ -153,22 +151,31 @@ describe('TodoService', () => {
 
     expect(reviewDate.getTime()).toBe(expectedReviewDate.getTime());
     expect(reviewedDate.getTime()).toBe(expectedReviewedDate.getTime());
+
+    expect(todo.scheduled).toBe(false);
   });
 
-  it('should set the next review date to be tomorrow for to-dos who were reviewed/created today', async () => {
-    const id = await service.addTodo({ title: 'todo' }) as number;
+  it('should set the next review date to be tomorrow for to-dos which were reviewed or scheduled today already', async () => {
+    const cases = [
+      { reviewAt: new Date() },
+      { reviewedAt: new Date(2023, 0, 1), scheduled: true }
+    ];
 
-    await service.updateTodo(id, { reviewAt: new Date() });
+    cases.forEach(async (c) => {
+      const id = await service.addTodo({ title: 'todo' }) as number;
 
-    const todo = await service.getTodo(id);
+      await service.updateTodo(id, c);
 
-    const nextReview = service.determineNextReview(todo);
-    const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+      const todo = await service.getTodo(id);
 
-    const reviewDate = new Date(nextReview.getFullYear(), nextReview.getMonth(), nextReview.getDate());
-    const expectedDate = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate());
+      const nextReview = service.determineNextReview(todo);
+      const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
 
-    expect(reviewDate.getTime()).toBe(expectedDate.getTime());
+      const reviewDate = new Date(nextReview.getFullYear(), nextReview.getMonth(), nextReview.getDate());
+      const expectedDate = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate());
+
+      expect(reviewDate.getTime()).toBe(expectedDate.getTime());
+    });
   });
 
   it('should double the time elapsed time between the last reviews for to-dos whose past review date is at least 1 day ago', async () => {
@@ -190,5 +197,31 @@ describe('TodoService', () => {
 
       expect(nextReview.getDate()).toBe(expectedInterval);
     });
+  });
+
+  it('should import to-dos from a json string into the database', async () => {
+    const json = JSON.stringify([
+      {
+        "title": "An imported to-do",
+        "createdAt": "2024-07-01T18:35:44.782Z",
+        "reviewedAt": "2024-07-01T18:36:51.734Z",
+        "reviewAt": "2024-07-01T18:35:44.782Z",
+        "scheduled": false,
+        "completed": true,
+        "id": 5
+      }]);
+
+    const ids = await service.importTodos(json) as number[];
+
+    const todo = await service.getTodo(ids[0]);
+
+    expect(todo.title).toBe("An imported to-do");
+
+    expect(todo.createdAt).toBeInstanceOf(Date);
+    expect(todo.reviewedAt).toBeInstanceOf(Date);
+    expect(todo.reviewAt).toBeInstanceOf(Date);
+
+    expect(todo.scheduled).toBeFalse();
+    expect(todo.completed).toBeTrue();
   });
 });

@@ -43,7 +43,7 @@
     <h3>"{{todo.title}}"</h3>
     <button (click)="schedule(todo.id)" class="schedule" tabindex="3"><b>Yes</b></button>
     <button (click)="postpone(todo.id)" class="postpone" tabindex="4"><b>Ask again</b>
-      ({{determineNextReview(todo).toLocaleDateString()}})</button>
+      ({{nextReviewDate()}})</button>
   </div>
   }
   @else if(todos().length) {
@@ -69,7 +69,7 @@
     @for (todo of scheduledTodos(); track todo.id) {
     <li>{{todo.title}}
       <button (click)="complete(todo.id)">Complete</button>
-      <button (click)="deschedule(todo.id)">Postpone</button>
+      <button (click)="postpone(todo.id)">Postpone</button>
     </li>
     }
   </ul>
