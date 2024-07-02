@@ -1,78 +1,46 @@
 import { Injectable } from '@angular/core';
 import { openDB } from 'idb';
 import { Todo } from './app.component';
+import { DatabaseService } from './database.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  private db = openDB('bucketdb', 1, {
-    upgrade(db) {
-      const store = db.createObjectStore('todos', { autoIncrement: true, keyPath: 'id' });
-
-      store.createIndex('reviewAt', 'reviewAt');
-      store.createIndex('scheduled', 'scheduled');
-    }
-  });
-
-  constructor() {
+  constructor(private databaseService: DatabaseService) {
   }
 
   async getTodos(): Promise<Todo[]> {
-    const tx = (await this.db).transaction('todos', 'readonly');
-    const store = tx.objectStore('todos');
-
-    return store.getAll();
+    return this.databaseService.getAll();
   }
 
   async getTodo(id: number): Promise<Todo> {
-    const tx = (await this.db).transaction('todos', 'readonly');
-    const store = tx.objectStore('todos');
-
-    return store.get(id);
+    return this.databaseService.get(id);
   }
 
 
   async addTodo(attributes: {}) {
-    const tx = (await this.db).transaction('todos', 'readwrite');
-    const store = tx.objectStore('todos');
-
     const data = {
       ...attributes,
       reviewAt: new Date(),
-      createdAt: new Date(),
       reviewedAt: new Date(),
       scheduled: false,
       completed: false
     };
 
-    return store.add(data);
+    return this.databaseService.add(data);
   }
 
   async updateTodo(id: number, attributes: {}) {
-    const tx = (await this.db).transaction('todos', 'readwrite');
-    const store = tx.objectStore('todos');
-
-    const todo = await store.get(id) as Todo;
-
-    return store.put({ ...todo, ...attributes });
+    return this.databaseService.update(id, attributes);
   }
 
   async removeTodo(id: number) {
-    const tx = (await this.db).transaction('todos', 'readwrite');
-    const store = tx.objectStore('todos');
-
-    await store.delete(id);
+    await this.databaseService.remove(id);
   }
 
   async getTodosForToday() {
-    const tx = (await this.db).transaction('todos', 'readonly');
-    const store = tx.objectStore('todos');
-
-    const index = store.index('reviewAt');
-
-
     const now = new Date();
 
     const reviewDate = new Date(
@@ -82,24 +50,26 @@ export class TodoService {
       24
     );
 
-    const range = IDBKeyRange.upperBound(reviewDate, true);
+    const query = {
+      index: 'reviewAt',
+      value: IDBKeyRange.upperBound(reviewDate, true)
+    };
 
-    const todos = await index.getAll(range)
+    const todos = await this.databaseService.getAll(query);
 
     return todos.filter(todo => !todo.scheduled && !todo.completed);
   }
 
   async postponeTodo(id: number) {
-    const tx = (await this.db).transaction('todos', 'readwrite');
-    const store = tx.objectStore('todos');
+    const todo = await this.databaseService.get(id);
 
-    const todo: Todo = await store.get(id);
+    const attributes = {
+      reviewAt: this.determineNextReview(todo),
+      reviewedAt: new Date(),
+      scheduled: false
+    }
 
-    todo.reviewAt = this.determineNextReview(todo);
-    todo.reviewedAt = new Date();
-    todo.scheduled = false;
-
-    await store.put(todo);
+    return this.databaseService.update(id, attributes);
   }
 
   determineNextReview(todo: Todo) {
@@ -125,13 +95,10 @@ export class TodoService {
       return dates.includes(key) ? new Date(value) : value;
     }) as Todo[];
 
-    const tx = (await this.db).transaction('todos', 'readwrite');
-    const store = tx.objectStore('todos');
-
     const requests = todos.map(todo => {
       const { id, ...attributes } = todo;
 
-      return store.add(attributes);
+      return this.databaseService.add(attributes);
     });
 
     return Promise.all(requests);
