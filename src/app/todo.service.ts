@@ -7,7 +7,6 @@ import { DatabaseService } from './database.service';
   providedIn: 'root'
 })
 export class TodoService {
-
   constructor(private databaseService: DatabaseService) {
   }
 
@@ -18,7 +17,6 @@ export class TodoService {
   async getTodo(id: number): Promise<Todo> {
     return this.databaseService.get(id);
   }
-
 
   async addTodo(attributes: {}) {
     const data = {
@@ -65,7 +63,7 @@ export class TodoService {
 
     const attributes = {
       reviewAt: this.determineNextReview(todo),
-      reviewedAt: new Date(),
+      reviewedAt: new Date(new Date().toDateString()),
       scheduled: false
     }
 
@@ -78,14 +76,10 @@ export class TodoService {
     const elapsedDays = elapsed / 1000 / 3600 / 24;
 
     if (elapsedDays >= 1 && !todo.scheduled) {
-      const timestamp = Date.now() + (elapsed * 2);
-
-      return new Date(timestamp);
+      return this.determineDateIn(elapsed * 2);
     }
 
-    const tomorrow = new Date().setDate(new Date().getDate() + 1);
-
-    return new Date(tomorrow);
+    return this.determineTomorrowDate();
   }
 
   async importTodos(data: string) {
@@ -102,5 +96,20 @@ export class TodoService {
     });
 
     return Promise.all(requests);
+  }
+
+  private determineDateIn(time: number) {
+    const timestamp = Date.now() + time;
+
+    const nextReview = new Date(new Date(timestamp).toDateString());
+
+    return nextReview;
+  }
+
+  private determineTomorrowDate() {
+    const today = new Date(new Date().toDateString());
+    const tomorrow = new Date(today.setDate(today.getDate() + 1));
+
+    return tomorrow;
   }
 }
