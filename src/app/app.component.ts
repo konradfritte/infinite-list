@@ -2,6 +2,7 @@ import { Component, ElementRef, computed, signal, viewChild } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TodoService } from './todo.service';
+import { CollectSectionComponent } from './collect-section/collect-section.component';
 
 export interface Todo {
   id: number,
@@ -18,7 +19,8 @@ export interface Todo {
   standalone: true,
   imports: [
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CollectSectionComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -43,12 +45,10 @@ export class AppComponent {
     this.synchronizeWithDatabase();
   }
 
-  async addTodo() {
-    await this.todoService.addTodo(this.form.value)
+  async addTodo(form: FormGroup) {
+    await this.todoService.addTodo(form.value);
 
     this.synchronizeWithDatabase();
-
-    this.form.reset();
   }
 
   async schedule(id: number) {

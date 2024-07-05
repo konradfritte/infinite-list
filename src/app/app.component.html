@@ -1,3 +1,4 @@
+<!-- Header Component -->
 <header>
   <h1>Infinite List</h1>
   <input (change)="import($event)" type="file" id="file" accept=".json" class="import">
@@ -18,7 +19,12 @@
     </div>
   </dialog>
 </header>
-<div class="collect-section">
+
+<!-- Collect Section Component -->
+
+<app-collect-section [todos]="todos()" (todoAdded)="addTodo($event)"
+  (todoRemoved)="remove($event)"></app-collect-section>
+<!-- <div class="collect-section">
   <h2>Collect</h2>
 
   <form [formGroup]="form" (ngSubmit)="addTodo()">
@@ -34,7 +40,8 @@
     </li>
     }
   </ul>
-</div>
+</div> -->
+<!-- Select Section Component -->
 <div class="select-section">
   <h2>Select</h2>
   @if (reviewTodo(); as todo) {
@@ -62,6 +69,7 @@
   </ul>
 
 </div>
+<!-- Review Section Component -->
 <div class="review-section">
   <h2>Do</h2>
   @if (scheduledTodos().length) {

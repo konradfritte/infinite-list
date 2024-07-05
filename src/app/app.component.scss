@@ -81,6 +81,14 @@ $color-background: #ffffff;
         height: 70%;
     }
 
+    app-collect-section {
+        grid-area: collect;
+
+        overflow: hidden;
+
+        border-right: 1px solid $color-border;
+    }
+
     .import {
         display: none;
 
@@ -140,27 +148,6 @@ $color-background: #ffffff;
                     margin-bottom: 16px;
                 }
             }
-        }
-
-
-        &.collect-section {
-            grid-area: collect;
-
-            form {
-                display: grid;
-                grid-template-columns: 1fr max-content;
-                gap: 8px;
-            }
-
-            ul {
-                height: 75%;
-
-                li.completed span {
-                    text-decoration: line-through;
-                    opacity: 0.5;
-                }
-            }
-
         }
 
         &.select-section {
