@@ -2,10 +2,6 @@ $color-text: #333333;
 $color-border: #c2c0c0;
 $color-background: #ffffff;
 
-* {
-    box-sizing: border-box;
-}
-
 :host {
     font-family: 'Courier New', Courier, monospace;
 
@@ -21,116 +17,28 @@ $color-background: #ffffff;
 
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: max-content 1fr;
+}
 
-    button,
-    input[type="submit"],
-    label {
-        padding: 4px 8px;
+app-header {
+    grid-area: header;
 
-        border: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+}
 
-        background-color: white;
-        box-shadow: none;
+app-collect-section,
+app-select-section {
+    overflow: hidden;
+    border-right: 1px solid $color-border;
+}
 
-        font-family: 'Courier New', Courier, monospace;
+app-collect-section {
+    grid-area: collect;
+}
 
-        cursor: pointer;
+app-select-section {
+    grid-area: select;
+}
 
-        &:hover {
-            background-color: $color-border;
-        }
-    }
-
-    input[type="text"] {
-        border: 1px solid $color-border;
-
-        font-family: 'Courier New', Courier, monospace;
-    }
-
-    dialog {
-        padding: 16px;
-
-        border: 1px solid $color-border;
-
-        div {
-            height: 100%;
-
-            display: grid;
-            grid-template-columns: auto;
-            grid-template-rows: max-content 1fr max-content;
-            gap: 16px;
-
-            button {
-                width: max-content;
-                justify-self: end;
-
-                margin: 0;
-            }
-
-            pre {
-                padding: 16px;
-                margin: 0;
-
-                border: 1px solid $color-border;
-
-                overflow-y: auto;
-            }
-        }
-
-        width: 50%;
-        height: 70%;
-    }
-
-    .import {
-        display: none;
-
-        & + label {
-
-            font-size: 13.33px;
-            padding: 8px;
-            height: max-content;
-        }
-    }
-
-    header {
-        grid-area: header;
-
-        display: grid;
-        grid-template-columns: 1fr repeat(2, max-content);
-        gap: 16px;
-
-        align-items: center;
-
-        border-bottom: 1px solid $color-border;
-
-        h1 {
-            color: $color-text;
-        }
-
-        button {
-            height: max-content;
-
-            padding: 8px 12px;
-            margin-right: 16px;
-
-            align-self: center;
-        }
-    }
-
-    app-collect-section, app-select-section {
-        overflow: hidden;
-        border-right: 1px solid $color-border;
-    }
-
-    app-collect-section {
-        grid-area: collect;
-    }
-
-    app-select-section {
-        grid-area: select;
-    }
-
-    app-review-section {
-        grid-area: review;
-    }
+app-review-section {
+    grid-area: review;
 }
