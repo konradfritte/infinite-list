@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { TodoService } from './todo.service';
 import { CollectSectionComponent } from './collect-section/collect-section.component';
 import { SelectSectionComponent } from './select-section/select-section.component';
+import { ReviewSectionComponent } from './review-section/review-section.component';
 
 export interface Todo {
   id: number,
@@ -22,7 +23,8 @@ export interface Todo {
     RouterOutlet,
     ReactiveFormsModule,
     CollectSectionComponent,
-    SelectSectionComponent
+    SelectSectionComponent,
+    ReviewSectionComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

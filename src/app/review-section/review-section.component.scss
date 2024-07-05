@@ -1,0 +1,49 @@
+$color-text: #333333;
+$color-border: #c2c0c0;
+$color-background: #ffffff;
+
+$font-family: "Courier New", Courier, monospace;
+
+:host {
+    padding: 32px;
+}
+
+button {
+    padding: 4px 8px;
+
+    border: 1px solid $color-border;
+
+    background-color: white;
+    box-shadow: none;
+
+    font-family: $font-family;
+
+    cursor: pointer;
+
+    &:last-of-type {
+        margin-left: 4px;
+    }
+
+    &:hover {
+        background-color: $color-border;
+    }
+}
+
+h2 {
+    color: $color-text;
+}
+
+ul {
+    height: 75%;
+    margin-top: 32px;
+
+    li {
+        padding: 4px 0;
+
+        font-family: $font-family;
+
+        &:last-of-type {
+            margin-bottom: 16px;
+        }
+    }
+}

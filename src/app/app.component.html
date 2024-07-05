@@ -72,7 +72,9 @@
 
 </div> -->
 <!-- Review Section Component -->
-<div class="review-section">
+<app-review-section [todos]="scheduledTodos()" (todoCompleted)="complete($event)"
+  (todoPostponed)="postpone($event)"></app-review-section>
+<!-- <div class="review-section">
   <h2>Do</h2>
   @if (scheduledTodos().length) {
   <ul>
@@ -87,4 +89,4 @@
   @else {
   <h3>Select some ideas for today!</h3>
   }
-</div>
+</div> -->

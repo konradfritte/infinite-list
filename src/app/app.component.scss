@@ -117,44 +117,6 @@ $color-background: #ffffff;
         }
     }
 
-    > div {
-        padding: 32px;
-
-        border-right: 1px solid $color-border;
-
-        overflow: hidden;
-
-        h2 {
-            color: $color-text;
-        }
-
-        ul {
-            margin-top: 32px;
-
-            overflow: auto;
-
-            li {
-                padding: 4px 0;
-
-                &:last-of-type {
-                    margin-bottom: 16px;
-                }
-            }
-        }
-
-        &.review-section {
-            grid-area: review;
-
-            ul {
-                height: 75%;
-            }
-
-            button:last-of-type {
-                margin-left: 4px;
-            }
-        }
-    }
-
     app-collect-section, app-select-section {
         overflow: hidden;
         border-right: 1px solid $color-border;
@@ -166,5 +128,9 @@ $color-background: #ffffff;
 
     app-select-section {
         grid-area: select;
+    }
+
+    app-review-section {
+        grid-area: review;
     }
 }
