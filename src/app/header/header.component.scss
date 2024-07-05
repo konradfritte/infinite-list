@@ -1,6 +1,4 @@
-$color-text: #333333;
-$color-border: #c2c0c0;
-$color-background: #ffffff;
+@import '../../styles';
 
 :host {
     display: grid;
@@ -12,25 +10,13 @@ $color-background: #ffffff;
 
 h1 {
     color: $color-text;
+    font-family: $font-family;
 }
 
 button,
 input[type="submit"],
 label {
-    padding: 4px 8px;
-
-    border: 1px solid $color-border;
-
-    background-color: white;
-    box-shadow: none;
-
-    font-family: 'Courier New', Courier, monospace;
-
-    cursor: pointer;
-
-    &:hover {
-        background-color: $color-border;
-    }
+    @include button();
 }
 
 button {

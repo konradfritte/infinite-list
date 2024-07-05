@@ -1,29 +1,7 @@
-$color-text: #333333;
-$color-border: #c2c0c0;
-$color-background: #ffffff;
-
-$font-family: "Courier New", Courier, monospace;
+@import '../../styles';
 
 :host {
-    padding: 32px;
-}
-
-button,
-input[type="submit"] {
-    padding: 4px 8px;
-
-    border: 1px solid $color-border;
-
-    background-color: white;
-    box-shadow: none;
-
-    font-family: $font-family;
-
-    cursor: pointer;
-
-    &:hover {
-        background-color: $color-border;
-    }
+    @include section();
 }
 
 form {
@@ -36,28 +14,24 @@ form {
 
         font-family: $font-family;
     }
-}
 
-h2 {
-    color: $color-text;
+    input[type="submit"] {
+        @include button();
+    }
 }
 
 ul {
     height: 75%;
-    margin-top: 32px;
-
     overflow: auto;
 
     li {
-        padding: 4px 0;
-
         &.completed span {
             text-decoration: line-through;
             opacity: 0.5;
         }
 
-        &:last-of-type {
-            margin-bottom: 16px;
+        button {
+            @include button();
         }
     }
 }

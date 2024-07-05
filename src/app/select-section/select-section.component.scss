@@ -1,15 +1,7 @@
-$color-text: #333333;
-$color-border: #c2c0c0;
-$color-background: #ffffff;
-
-$font-family: "Courier New", Courier, monospace;
+@import '../../styles';
 
 :host {
-    padding: 32px;
-}
-
-h2 {
-    color: $color-text;
+    @include section();
 }
 
 div {
@@ -26,25 +18,17 @@ div {
 
     p {
         grid-area: a;
+        font-family: $font-family;
     }
 
     h3 {
         grid-area: b;
-
+        font-family: $font-family;
         text-align: center;
     }
 
     button {
-        padding: 4px 8px;
-
-        border: 1px solid $color-text;
-
-        background-color: white;
-        box-shadow: none;
-
-        font-family: $font-family;
-
-        cursor: pointer;
+        @include button();
 
         &.schedule {
             grid-area: c;
@@ -63,19 +47,8 @@ div {
 
 ul {
     height: 25%;
-    margin-top: 32px;
 
     overflow: hidden;
 
     opacity: 0.5;
-
-    li {
-        padding: 4px 0;
-
-        font-family: $font-family;
-
-        &:last-of-type {
-            margin-bottom: 16px;
-        }
-    }
 }
