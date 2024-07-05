@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TodoService } from './todo.service';
 import { CollectSectionComponent } from './collect-section/collect-section.component';
+import { SelectSectionComponent } from './select-section/select-section.component';
 
 export interface Todo {
   id: number,
@@ -20,7 +21,8 @@ export interface Todo {
   imports: [
     RouterOutlet,
     ReactiveFormsModule,
-    CollectSectionComponent
+    CollectSectionComponent,
+    SelectSectionComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,0 +1,81 @@
+$color-text: #333333;
+$color-border: #c2c0c0;
+$color-background: #ffffff;
+
+$font-family: "Courier New", Courier, monospace;
+
+:host {
+    padding: 32px;
+}
+
+h2 {
+    color: $color-text;
+}
+
+div {
+    padding: 16px;
+
+    display: grid;
+    grid-template-areas:
+        "a a"
+        "b b"
+        "c d";
+    gap: 8px;
+
+    border: 2px solid $color-text;
+
+    p {
+        grid-area: a;
+    }
+
+    h3 {
+        grid-area: b;
+
+        text-align: center;
+    }
+
+    button {
+        padding: 4px 8px;
+
+        border: 1px solid $color-text;
+
+        background-color: white;
+        box-shadow: none;
+
+        font-family: $font-family;
+
+        cursor: pointer;
+
+        &.schedule {
+            grid-area: c;
+        }
+
+        &.postpone {
+            grid-area: d;
+        }
+
+        &:hover {
+            background-color: $color-text;
+            color: $color-background;
+        }
+    }
+}
+
+ul {
+    height: 25%;
+    margin-top: 32px;
+
+    overflow: hidden;
+
+    opacity: 0.5;
+
+    li {
+        padding: 4px 0;
+
+        font-family: $font-family;
+
+        &:last-of-type {
+            margin-bottom: 16px;
+        }
+    }
+}

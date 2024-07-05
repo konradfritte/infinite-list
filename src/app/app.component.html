@@ -42,7 +42,9 @@
   </ul>
 </div> -->
 <!-- Select Section Component -->
-<div class="select-section">
+<app-select-section [todos]="todos()" [todosForToday]="todosForToday()" (todoScheduled)="schedule($event)"
+  (todoPostponed)="postpone($event)"></app-select-section>
+<!-- <div class="select-section">
   <h2>Select</h2>
   @if (reviewTodo(); as todo) {
   <div>
@@ -68,7 +70,7 @@
     }
   </ul>
 
-</div>
+</div> -->
 <!-- Review Section Component -->
 <div class="review-section">
   <h2>Do</h2>

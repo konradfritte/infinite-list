@@ -81,14 +81,6 @@ $color-background: #ffffff;
         height: 70%;
     }
 
-    app-collect-section {
-        grid-area: collect;
-
-        overflow: hidden;
-
-        border-right: 1px solid $color-border;
-    }
-
     .import {
         display: none;
 
@@ -150,57 +142,6 @@ $color-background: #ffffff;
             }
         }
 
-        &.select-section {
-            grid-area: select;
-
-            div {
-                padding: 16px;
-
-                display: grid;
-                grid-template-areas:
-                    "a a"
-                    "b b"
-                    "c d";
-                gap: 8px;
-
-                border: 2px solid $color-text;
-
-                p {
-                    grid-area: a;
-                }
-
-                h3 {
-                    grid-area: b;
-
-                    text-align: center;
-                }
-
-                button {
-                    border: 1px solid $color-text;
-
-                    &.schedule {
-                        grid-area: c;
-                    }
-
-                    &.postpone {
-                        grid-area: d;
-                    }
-
-                    &:hover {
-                        background-color: $color-text;
-                        color: $color-background;
-                    }
-                }
-            }
-
-            ul {
-                height: 25%;
-                overflow: hidden;
-
-                opacity: 0.5;
-            }
-        }
-
         &.review-section {
             grid-area: review;
 
@@ -212,5 +153,18 @@ $color-background: #ffffff;
                 margin-left: 4px;
             }
         }
+    }
+
+    app-collect-section, app-select-section {
+        overflow: hidden;
+        border-right: 1px solid $color-border;
+    }
+
+    app-collect-section {
+        grid-area: collect;
+    }
+
+    app-select-section {
+        grid-area: select;
     }
 }
