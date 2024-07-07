@@ -1,9 +1,7 @@
 <app-header [todos]="todos()" (dataImported)="import($event)" (dataExported)="export($event)"></app-header>
 
 <app-collect-section></app-collect-section>
-
-<app-select-section [todos]="todos()" [todosForToday]="todosForToday()" (todoScheduled)="schedule($event)"
-  (todoPostponed)="postpone($event)"></app-select-section>
+<app-select-section></app-select-section>
 
 <app-review-section [todos]="scheduledTodos()" (todoCompleted)="complete($event)"
   (todoPostponed)="postpone($event)"></app-review-section>
