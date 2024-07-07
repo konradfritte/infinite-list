@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
-import { Todo } from '../app.component';
+import { Component, computed } from '@angular/core';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-review-section',
@@ -9,17 +9,22 @@ import { Todo } from '../app.component';
   styleUrl: './review-section.component.scss'
 })
 export class ReviewSectionComponent {
-  @Output() todoCompleted = new EventEmitter<number>();
-  @Output() todoPostponed = new EventEmitter<number>();
+  todos = computed(() => {
+    const todos = this.todoService.listenToTodos();
 
-  todos = input.required<Todo[]>();
+    return todos().filter(todo => todo.scheduled);
+  });
 
 
-  complete(id: number) {
-    this.todoCompleted.emit(id);
+  constructor(private todoService: TodoService) {
+
   }
 
-  postpone(id: number) {
-    this.todoPostponed.emit(id);
+  async complete(id: number) {
+    await this.todoService.updateTodo(id, { completed: true, scheduled: false });
+  }
+
+  async postpone(id: number) {
+    await this.todoService.postponeTodo(id);
   }
 }
