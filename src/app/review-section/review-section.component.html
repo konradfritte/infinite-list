@@ -1,0 +1,14 @@
+<h2>Do</h2>
+@if (todos().length) {
+<ul>
+  @for (todo of todos(); track todo.id) {
+  <li>{{todo.title}}
+    <button (click)="complete(todo.id)">Complete</button>
+    <button (click)="postpone(todo.id)">Postpone</button>
+  </li>
+  }
+</ul>
+}
+@else {
+<h3>Select some ideas for today!</h3>
+}
