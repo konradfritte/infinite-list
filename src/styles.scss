@@ -24,9 +24,12 @@ $font-family: "Courier New", Courier, monospace;
 @mixin section {
     padding: 32px;
 
+    * {
+        font-family: $font-family;
+    }
+
     h2 {
         color: $color-text;
-        font-family: $font-family;
     }
 
     ul {
@@ -34,8 +37,6 @@ $font-family: "Courier New", Courier, monospace;
 
         li {
             padding: 4px 0;
-
-            font-family: $font-family;
 
             &:last-of-type {
                 margin-bottom: 16px;
