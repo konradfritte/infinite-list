@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { openDB } from 'idb';
+import { Injectable, computed, signal } from '@angular/core';
 import { Todo } from './app.component';
 import { DatabaseService } from './database.service';
 
@@ -7,15 +6,30 @@ import { DatabaseService } from './database.service';
   providedIn: 'root'
 })
 export class TodoService {
+
+  private todos = signal<Todo[]>([]);
+  private todosForToday = signal<Todo[]>([]);
+
   constructor(private databaseService: DatabaseService) {
+    this.synchronizeWithDatabase();
   }
 
   async getTodos(): Promise<Todo[]> {
-    return this.databaseService.getAll();
+    const todos = await this.databaseService.getAll();
+
+    return todos;
   }
 
   async getTodo(id: number): Promise<Todo> {
     return this.databaseService.get(id);
+  }
+
+  listenToTodos() {
+    return computed(() => this.todos());
+  }
+
+  listenToTodosForToday() {
+    return computed(() => this.todosForToday());
   }
 
   async addTodo(attributes: {}) {
@@ -27,15 +41,25 @@ export class TodoService {
       completed: false
     };
 
-    return this.databaseService.add(data);
+    const result = this.databaseService.add(data);
+
+    this.synchronizeWithDatabase();
+
+    return result;
   }
 
   async updateTodo(id: number, attributes: {}) {
-    return this.databaseService.update(id, attributes);
+    const result = this.databaseService.update(id, attributes);
+
+    this.synchronizeWithDatabase();
+
+    return result;
   }
 
   async removeTodo(id: number) {
     await this.databaseService.remove(id);
+
+    this.synchronizeWithDatabase();
   }
 
   async getTodosForToday() {
@@ -67,7 +91,11 @@ export class TodoService {
       scheduled: false
     }
 
-    return this.databaseService.update(id, attributes);
+    const result = this.databaseService.update(id, attributes);
+
+    this.synchronizeWithDatabase();
+
+    return result;
   }
 
   determineNextReview(todo: Todo) {
@@ -95,7 +123,11 @@ export class TodoService {
       return this.databaseService.add(attributes);
     });
 
-    return Promise.all(requests);
+    const result = Promise.all(requests);
+
+    this.synchronizeWithDatabase();
+
+    return result;
   }
 
   private determineDateIn(time: number) {
@@ -111,5 +143,13 @@ export class TodoService {
     const tomorrow = new Date(today.setDate(today.getDate() + 1));
 
     return tomorrow;
+  }
+
+  private async synchronizeWithDatabase() {
+    const todos = await this.getTodos();
+    const todosForToday = await this.getTodosForToday();
+
+    this.todos.set(todos);
+    this.todosForToday.set(todosForToday);
   }
 }
