@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, EventEmitter, Output, input, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Todo } from '../app.component';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-collect-section',
@@ -12,22 +12,21 @@ import { Todo } from '../app.component';
   styleUrl: './collect-section.component.scss'
 })
 export class CollectSectionComponent {
-  @Output() todoAdded = new EventEmitter<FormGroup>();
-  @Output() todoRemoved = new EventEmitter<number>();
-
-  todos = input.required<Todo[]>();
+  todos = this.todoService.listenToTodos();
 
   form = new FormGroup({
     title: new FormControl("", [Validators.required])
   });
 
+  constructor(private todoService: TodoService) { }
+
   async addTodo() {
-    this.todoAdded.emit(this.form);
+    await this.todoService.addTodo(this.form.value);
 
     this.form.reset();
   }
 
-  remove(id: number) {
-    this.todoRemoved.emit(id);
+  async remove(id: number) {
+    await this.todoService.removeTodo(id);
   }
 }
