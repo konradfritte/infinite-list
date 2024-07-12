@@ -5,11 +5,16 @@
 }
 
 form {
+    padding: 16px;
+    padding-bottom: 0;
+
     display: grid;
     grid-template-columns: 1fr max-content;
     gap: 8px;
 
     input[type="text"] {
+        padding: 8px 12px;
+
         border: 1px solid $color-border;
 
         font-family: $font-family;
@@ -21,17 +26,37 @@ form {
 }
 
 ul {
-    height: 75%;
+    max-height: 100%;
     overflow: auto;
 
+    list-style: none;
+    padding-left: 16px;
+
     li {
+        margin-bottom: 16px;
+        border: 1px solid $color-border;
+
+        div {
+            padding: 8px 12px;
+
+            display: grid;
+            grid-template-columns: 1fr max-content;
+            gap: 8px;
+
+            span {
+                font-weight: bold;
+            }
+
+            button {
+                @include button();
+
+                height: max-content;
+            }
+        }
+
         &.completed span {
             text-decoration: line-through;
             opacity: 0.5;
-        }
-
-        button {
-            @include button();
         }
     }
 }

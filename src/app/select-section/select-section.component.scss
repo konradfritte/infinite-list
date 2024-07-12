@@ -2,12 +2,15 @@
 
 :host {
     @include section();
+
+    padding: 16px;
 }
 
 div {
     padding: 16px;
 
     display: grid;
+    grid-template-rows: max-content 1fr max-content;
     grid-template-areas:
         "a a"
         "b b"
@@ -25,6 +28,8 @@ div {
         grid-area: b;
         font-family: $font-family;
         text-align: center;
+
+        overflow: hidden;
     }
 
     button {
@@ -46,6 +51,7 @@ div {
 }
 
 ul {
+    display: none;
     height: 25%;
 
     overflow: hidden;

@@ -22,7 +22,8 @@ $font-family: "Courier New", Courier, monospace;
 }
 
 @mixin section {
-    padding: 32px;
+    display: grid;
+    gap: 16px;
 
     * {
         font-family: $font-family;
@@ -30,17 +31,24 @@ $font-family: "Courier New", Courier, monospace;
 
     h2 {
         color: $color-text;
+
+        display: none;
     }
 
     ul {
-        margin-top: 32px;
+        margin: 0;
+        padding-right: 16px;
 
         li {
-            padding: 4px 0;
+            padding: 8px 0;
 
             &:last-of-type {
                 margin-bottom: 16px;
             }
         }
     }
+}
+
+body {
+    margin: 0;
 }

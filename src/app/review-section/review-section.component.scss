@@ -3,16 +3,52 @@
 
 :host {
     @include section();
-}
 
-button {
-    @include button();
-
-    &:last-of-type {
-        margin-left: 4px;
-    }
+    padding-top: 16px;
 }
 
 ul {
-    height: 75%;
+    padding-left: 16px;
+    max-height: 100%;
+    overflow: auto;
+
+    list-style: none;
+
+    li {
+        border: 1px solid $color-border;
+
+        margin-bottom: 16px;
+
+        > div {
+            padding: 8px 12px;
+
+            display: grid;
+            grid-template-rows: 1fr max-content;
+
+            grid-template-areas:
+                "todo todo"
+                "complete postpone";
+
+            column-gap: 4px;
+            row-gap: 8px;
+
+            span {
+                font-weight: bold;
+                grid-area: todo;
+            }
+
+            button {
+                @include button();
+
+                &.completed {
+                    grid-area: complete;
+                }
+
+                &.postpone {
+                    grid-area: postpone;
+                }
+
+            }
+        }
+    }
 }

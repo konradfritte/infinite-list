@@ -1,5 +1,13 @@
 <app-header></app-header>
 
-<app-collect-section></app-collect-section>
-<app-select-section></app-select-section>
-<app-review-section></app-review-section>
+<main>
+    <app-collect-section [class.hidden]="currentView() !== 'collect'"></app-collect-section>
+    <app-select-section [class.hidden]="currentView() !== 'select'"></app-select-section>
+    <app-review-section [class.hidden]="currentView() !== 'review'"></app-review-section>
+</main>
+
+<nav>
+    <a (click)="show('collect')" [class.current-view]="currentView() == 'collect'"  href="#">Collect</a>
+    <a (click)="show('select')"  [class.current-view]="currentView() == 'select'" href="#">Select</a>
+    <a (click)="show('review')"  [class.current-view]="currentView() == 'review'" href="#">Do</a>
+</nav>

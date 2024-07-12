@@ -7,18 +7,61 @@
 
     display: grid;
 
-    grid-template-areas:
-        "header     header      header"
-        "collect    select      review";
+    grid-template-columns: 100%;
+    grid-template-rows: max-content 1fr max-content;
 
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: max-content 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "nav";
+}
+
+main {
+    display: grid;
+
+    // grid-template-areas: "collect select review";
+
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+
+    overflow: hidden;
+
+    app-collect-section,
+    app-select-section,
+    app-review-section {
+
+        &.hidden {
+            display: none;
+        }
+
+        border: none;
+    }
+}
+
+nav {
+    padding: 16px;
+
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-around;
+
+    border-top: 1px solid $color-border;
+
+    a {
+        font-family: $font-family;
+        color: $color-text;
+
+        opacity: 0.5;
+
+        &.current-view {
+            opacity: 1;
+            font-weight: bold;
+        }
+    }
 }
 
 app-header {
-    grid-area: header;
-
-    border-bottom: 1px solid $color-border;
+    // border-bottom: 1px solid $color-border;
 }
 
 app-collect-section,
@@ -28,13 +71,13 @@ app-select-section {
 }
 
 app-collect-section {
-    grid-area: collect;
+    // grid-area: collect;
 }
 
 app-select-section {
-    grid-area: select;
+    // grid-area: select;
 }
 
 app-review-section {
-    grid-area: review;
+    // grid-area: review;
 }

@@ -1,29 +1,36 @@
 @import '../../styles';
 
 :host {
+    padding: 16px;
+
     display: grid;
     grid-template-columns: 1fr repeat(2, max-content);
-    gap: 16px;
+    gap: 8px;
 
     align-items: center;
 }
 
 h1 {
+    margin: 0;
+
     color: $color-text;
     font-family: $font-family;
+
+    font-size: 20px;
 }
 
 button,
 input[type="submit"],
 label {
     @include button();
+
+    font-size: 11px;
+
+    line-height: 1rem;
 }
 
 button {
     height: max-content;
-
-    padding: 8px 12px;
-    margin-right: 16px;
 
     align-self: center;
 }
@@ -64,11 +71,4 @@ dialog {
 
 .import {
     display: none;
-
-    & + label {
-
-        font-size: 13.33px;
-        padding: 8px;
-        height: max-content;
-    }
 }
