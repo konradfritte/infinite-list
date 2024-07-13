@@ -9,6 +9,7 @@ $font-family: "Courier New", Courier, monospace;
 
     border: 1px solid $color-border;
 
+    color: $color-text;
     background-color: white;
     box-shadow: none;
 
@@ -16,7 +17,11 @@ $font-family: "Courier New", Courier, monospace;
 
     cursor: pointer;
 
-    &:hover {
+    &:active {
+        background-color: $color-border;
+    }
+
+    @media (hover: hover) {
         background-color: $color-border;
     }
 

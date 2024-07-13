@@ -61,7 +61,12 @@ div {
             grid-area: d;
         }
 
-        &:hover {
+        &:active {
+            background-color: $color-text;
+            color: $color-background;
+        }
+
+        @media (hover: hover) {
             background-color: $color-text;
             color: $color-background;
         }
