@@ -3,7 +3,11 @@
 :host {
     @include section();
 
-    grid-template-rows: max-content max-content 1fr;
+    grid-template-rows: max-content 1fr;
+
+    @media screen and (min-width: 1200px) {
+        grid-template-rows: max-content max-content 1fr;
+    }
 }
 
 form {
@@ -35,7 +39,6 @@ form {
 }
 
 ul {
-    max-height: 100%;
     overflow: auto;
 
     list-style: none;
