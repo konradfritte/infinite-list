@@ -23,7 +23,9 @@ $font-family: "Courier New", Courier, monospace;
     }
 
     @media (hover: hover) {
-        background-color: $color-border;
+        &:hover {
+            background-color: $color-border;
+        }
     }
 
     @media screen and (min-width: 1200px) {
