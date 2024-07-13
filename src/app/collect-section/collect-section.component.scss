@@ -13,6 +13,7 @@ form {
     gap: 8px;
 
     input[type="text"] {
+        min-width: 128px;
         padding: 8px 12px;
 
         border: 1px solid $color-border;
@@ -37,15 +38,11 @@ ul {
         border: 1px solid $color-border;
 
         div {
-            padding: 8px 12px;
+            padding: 12px 16px;
 
             display: grid;
             grid-template-columns: 1fr max-content;
-            gap: 8px;
-
-            span {
-                font-weight: bold;
-            }
+            gap: 16px;
 
             button {
                 @include button();

@@ -5,7 +5,7 @@ $color-background: #ffffff;
 $font-family: "Courier New", Courier, monospace;
 
 @mixin button {
-    padding: 4px 8px;
+    padding: 12px 16px;
 
     border: 1px solid $color-border;
 
@@ -24,6 +24,8 @@ $font-family: "Courier New", Courier, monospace;
 @mixin section {
     display: grid;
     gap: 16px;
+
+    grid-template-columns: 100%;
 
     * {
         font-family: $font-family;

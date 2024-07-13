@@ -61,12 +61,11 @@ nav {
 }
 
 app-header {
-    // border-bottom: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
 }
 
 app-collect-section,
 app-select-section {
-    overflow: hidden;
     border-right: 1px solid $color-border;
 }
 

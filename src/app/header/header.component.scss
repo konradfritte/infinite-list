@@ -36,6 +36,11 @@ button {
 }
 
 dialog {
+    width: 100%;
+    height: 90%;
+
+    inset-block-start: auto;
+
     padding: 16px;
 
     border: 1px solid $color-border;
@@ -64,9 +69,6 @@ dialog {
             overflow-y: auto;
         }
     }
-
-    width: 50%;
-    height: 70%;
 }
 
 .import {
