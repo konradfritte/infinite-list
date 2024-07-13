@@ -5,7 +5,7 @@ $color-background: #ffffff;
 $font-family: "Courier New", Courier, monospace;
 
 @mixin button {
-    padding: 4px 8px;
+    padding: 12px 16px;
 
     border: 1px solid $color-border;
 
@@ -19,10 +19,15 @@ $font-family: "Courier New", Courier, monospace;
     &:hover {
         background-color: $color-border;
     }
+
+    @media screen and (min-width: 1200px) {
+        padding: 4px 8px;
+    }
 }
 
 @mixin section {
-    padding: 32px;
+    display: grid;
+    grid-template-columns: 100%;
 
     * {
         font-family: $font-family;
@@ -30,17 +35,53 @@ $font-family: "Courier New", Courier, monospace;
 
     h2 {
         color: $color-text;
+
+        display: none;
+    }
+
+    > h3 {
+        align-self: center;
+        text-align: center;
+
+        margin: 0 16px;
+
+        @media screen and (min-width: 1200px) {
+            align-self: unset;
+            text-align: unset;
+
+            margin: 0;
+        }
     }
 
     ul {
-        margin-top: 32px;
+        margin: 0;
+        padding-right: 16px;
 
         li {
-            padding: 4px 0;
-
             &:last-of-type {
                 margin-bottom: 16px;
             }
         }
     }
+
+    @media screen and (min-width: 1200px) {
+        & {
+            h2 {
+                display: block;
+            }
+
+            ul {
+                padding: unset;
+                list-style: unset;
+
+                margin-top: 32px;
+                padding-left: 40px;
+            }
+        }
+
+    }
+}
+
+body {
+    margin: 0;
 }

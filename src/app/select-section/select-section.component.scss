@@ -2,27 +2,50 @@
 
 :host {
     @include section();
+
+    @media screen and (min-width: 1200px) {
+        grid-template-rows: repeat(3, max-content);
+    }
 }
 
 div {
+    height: 75%;
+    width: 75%;
     padding: 16px;
 
+    align-self: center;
+    justify-self: center;
+
+    overflow: hidden;
+
     display: grid;
+    grid-template-rows: max-content 1fr max-content;
     grid-template-areas:
         "a a"
         "b b"
         "c d";
-    gap: 8px;
+
+    gap: 16px;
 
     border: 2px solid $color-text;
 
     p {
         grid-area: a;
+
+        margin: 0;
+
         font-family: $font-family;
     }
 
     h3 {
         grid-area: b;
+        display: block;
+        overflow: auto;
+
+        align-self: center;
+
+        margin: 0;
+
         font-family: $font-family;
         text-align: center;
     }
@@ -43,12 +66,27 @@ div {
             color: $color-background;
         }
     }
+
+    @media screen and (min-width: 1200px) {
+
+        p,
+        h3 {
+            margin: revert;
+        }
+    }
 }
 
 ul {
+    display: none;
     height: 25%;
 
     overflow: hidden;
 
     opacity: 0.5;
+
+    @media screen and (min-width:1200px) {
+        & {
+            display: block;
+        }
+    }
 }

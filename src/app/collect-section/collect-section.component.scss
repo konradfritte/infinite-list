@@ -5,11 +5,17 @@
 }
 
 form {
+    padding: 16px;
+    padding-bottom: 0;
+
     display: grid;
     grid-template-columns: 1fr max-content;
     gap: 8px;
 
     input[type="text"] {
+        min-width: 128px;
+        padding: 8px 12px;
+
         border: 1px solid $color-border;
 
         font-family: $font-family;
@@ -18,20 +24,62 @@ form {
     input[type="submit"] {
         @include button();
     }
+
+    @media screen and (min-width: 1200px) {
+        & {
+            padding: unset;
+        }
+    }
 }
 
 ul {
-    height: 75%;
+    max-height: 100%;
     overflow: auto;
 
+    list-style: none;
+    padding-left: 16px;
+
     li {
+        margin: 16px 0;
+        border: 1px solid $color-border;
+
+        div {
+            padding: 12px 16px;
+
+            display: grid;
+            grid-template-columns: 1fr max-content;
+            gap: 16px;
+
+            button {
+                @include button();
+
+                height: max-content;
+            }
+        }
+
         &.completed span {
             text-decoration: line-through;
             opacity: 0.5;
         }
+    }
 
-        button {
-            @include button();
+    @media screen and (min-width: 1200px) {
+        & {
+            height: 80%;
+
+            li {
+                margin: 8px 0;
+                border: unset;
+
+                div {
+                    padding: unset;
+                    display: unset;
+
+                    button {
+                        margin-left: 8px;
+                    }
+                }
+            }
         }
     }
 }
