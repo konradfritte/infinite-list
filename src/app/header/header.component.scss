@@ -8,6 +8,10 @@
     gap: 8px;
 
     align-items: center;
+
+    @media screen and (min-width: 1200px) {
+        padding: 0 8px;
+    }
 }
 
 h1 {
@@ -17,6 +21,13 @@ h1 {
     font-family: $font-family;
 
     font-size: 20px;
+
+    @media screen and (min-width:1200px) {
+        & {
+            font-size: revert;
+            margin: revert;
+        }
+    }
 }
 
 button,
@@ -24,9 +35,14 @@ input[type="submit"],
 label {
     @include button();
 
-    font-size: 11px;
-
     line-height: 1rem;
+
+    @media screen and (min-width: 1200px) {
+
+        font-size: 13.33px;
+
+        padding: 8px 12px;
+    }
 }
 
 button {
@@ -68,6 +84,12 @@ dialog {
 
             overflow-y: auto;
         }
+    }
+
+    @media screen and (min-width: 1200px) {
+        width: 50%;
+        height: 70%;
+        inset-block-start: revert;
     }
 }
 

@@ -4,7 +4,9 @@
 :host {
     @include section();
 
-    padding-top: 16px;
+    @media screen and (min-width: 1200px) {
+        grid-template-rows: max-content 1fr;
+    }
 }
 
 ul {
@@ -17,7 +19,7 @@ ul {
     li {
         border: 1px solid $color-border;
 
-        margin-bottom: 16px;
+        margin: 16px 0;
 
         > div {
             padding: 12px 16px;
@@ -33,7 +35,6 @@ ul {
             row-gap: 8px;
 
             span {
-                font-weight: bold;
                 grid-area: todo;
             }
 
@@ -50,5 +51,30 @@ ul {
 
             }
         }
+    }
+
+    @media screen and (min-width: 1200px) {
+        list-style: initial;
+        padding-left: 40px;
+
+        li {
+            border: unset;
+
+            margin: 8px 0;
+
+            div {
+                padding: unset;
+
+                grid-template-columns: 1fr max-content max-content;
+                grid-template-rows: auto;
+
+                grid-template-areas: "todo complete postpone";
+
+                button {
+                    height: max-content;
+                }
+            }
+        }
+
     }
 }

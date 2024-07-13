@@ -19,12 +19,14 @@ $font-family: "Courier New", Courier, monospace;
     &:hover {
         background-color: $color-border;
     }
+
+    @media screen and (min-width: 1200px) {
+        padding: 4px 8px;
+    }
 }
 
 @mixin section {
     display: grid;
-    gap: 16px;
-
     grid-template-columns: 100%;
 
     * {
@@ -37,17 +39,46 @@ $font-family: "Courier New", Courier, monospace;
         display: none;
     }
 
+    > h3 {
+        align-self: center;
+        text-align: center;
+
+        margin: 0 16px;
+
+        @media screen and (min-width: 1200px) {
+            align-self: unset;
+            text-align: unset;
+
+            margin: 0;
+        }
+    }
+
     ul {
         margin: 0;
         padding-right: 16px;
 
         li {
-            padding: 8px 0;
-
             &:last-of-type {
                 margin-bottom: 16px;
             }
         }
+    }
+
+    @media screen and (min-width: 1200px) {
+        & {
+            h2 {
+                display: block;
+            }
+
+            ul {
+                padding: unset;
+                list-style: unset;
+
+                margin-top: 32px;
+                padding-left: 40px;
+            }
+        }
+
     }
 }
 

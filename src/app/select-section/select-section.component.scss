@@ -3,13 +3,18 @@
 :host {
     @include section();
 
-    padding: 16px;
+    @media screen and (min-width: 1200px) {
+        grid-template-rows: repeat(3, max-content);
+    }
 }
 
 div {
     height: 75%;
-    align-self: center;
+    width: 75%;
     padding: 16px;
+
+    align-self: center;
+    justify-self: center;
 
     overflow: hidden;
 
@@ -43,7 +48,6 @@ div {
 
         font-family: $font-family;
         text-align: center;
-
     }
 
     button {
@@ -62,11 +66,14 @@ div {
             color: $color-background;
         }
     }
-}
 
-h3 {
-    align-self: center;
-    text-align: center;
+    @media screen and (min-width: 1200px) {
+
+        p,
+        h3 {
+            margin: revert;
+        }
+    }
 }
 
 ul {
@@ -76,4 +83,10 @@ ul {
     overflow: hidden;
 
     opacity: 0.5;
+
+    @media screen and (min-width:1200px) {
+        & {
+            display: block;
+        }
+    }
 }
