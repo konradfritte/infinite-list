@@ -35,7 +35,7 @@ export class DatabaseService {
 
     const index = store.index(query.index);
 
-    return index.getAll(query.value)
+    return index.getAll(query.value) as Promise<Todo[]>
 
   }
 
