@@ -47,7 +47,7 @@ export class TodoService {
       completed: false
     };
 
-    return await store.add(data);
+    return store.add(data);
   }
 
   async updateTodo(id: number, attributes: {}) {
@@ -89,7 +89,7 @@ export class TodoService {
     return todos.filter(todo => !todo.scheduled && !todo.completed);
   }
 
-  async postpone(id: number) {
+  async postponeTodo(id: number) {
     const tx = (await this.db).transaction('todos', 'readwrite');
     const store = tx.objectStore('todos');
 
@@ -97,6 +97,7 @@ export class TodoService {
 
     todo.reviewAt = this.determineNextReview(todo);
     todo.reviewedAt = new Date();
+    todo.scheduled = false;
 
     await store.put(todo);
   }
@@ -106,7 +107,7 @@ export class TodoService {
 
     const elapsedDays = elapsed / 1000 / 3600 / 24;
 
-    if (elapsedDays >= 1) {
+    if (elapsedDays >= 1 && !todo.scheduled) {
       const timestamp = Date.now() + (elapsed * 2);
 
       return new Date(timestamp);
@@ -115,5 +116,24 @@ export class TodoService {
     const tomorrow = new Date().setDate(new Date().getDate() + 1);
 
     return new Date(tomorrow);
+  }
+
+  async importTodos(data: string) {
+    const todos = JSON.parse(data, (key, value) => {
+      const dates = ['reviewAt', 'reviewedAt', 'createdAt'];
+
+      return dates.includes(key) ? new Date(value) : value;
+    }) as Todo[];
+
+    const tx = (await this.db).transaction('todos', 'readwrite');
+    const store = tx.objectStore('todos');
+
+    const requests = todos.map(todo => {
+      const { id, ...attributes } = todo;
+
+      return store.add(attributes);
+    });
+
+    return Promise.all(requests);
   }
 }
