@@ -67,8 +67,10 @@ div {
         }
 
         @media (hover: hover) {
-            background-color: $color-text;
-            color: $color-background;
+            &:hover {
+                background-color: $color-text;
+                color: $color-background;
+            }
         }
     }
 
