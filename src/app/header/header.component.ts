@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, Output, input, signal, viewChild } from '@angular/core';
-import { Todo } from '../app.component';
+import { Component, ElementRef, signal, viewChild } from '@angular/core';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +9,15 @@ import { Todo } from '../app.component';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @Output() dataImported = new EventEmitter();
-  @Output() dataExported = new EventEmitter<string>();
-
-  todos = input.required<Todo[]>();
+  todos = this.todoService.listenToTodos();
 
   exportData = signal<string>('');
 
   dialog = viewChild<ElementRef>('dialog');
+
+  constructor(private todoService: TodoService) {
+
+  }
 
   import(event: any) {
     const file: File = event.target.files[0];
@@ -25,11 +26,19 @@ export class HeaderComponent {
       return;
     }
 
-    this.dataImported.emit(file);
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const data = e.target?.result as string;
+
+      await this.todoService.importTodos(data);
+    }
+
+    reader.readAsText(file);
   }
 
   export() {
-    this.dataExported.emit(this.exportData());
+    navigator.clipboard.writeText(this.exportData());
   }
 
   showDialog() {

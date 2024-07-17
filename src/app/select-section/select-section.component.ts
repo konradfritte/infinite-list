@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, computed, input, signal } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { Todo } from '../app.component';
 import { TodoService } from '../todo.service';
 
@@ -10,11 +10,8 @@ import { TodoService } from '../todo.service';
   styleUrl: './select-section.component.scss'
 })
 export class SelectSectionComponent {
-  @Output() todoScheduled = new EventEmitter<number>();
-  @Output() todoPostponed = new EventEmitter<number>();
-
-  todos = input<Todo[]>([]);
-  todosForToday = input<Todo[]>([]);
+  todos = this.todoService.listenToTodos();
+  todosForToday = this.todoService.listenToTodosForToday();
 
   reviewTodo = computed(() => this.todosForToday()[0]);
 
@@ -22,11 +19,11 @@ export class SelectSectionComponent {
   }
 
   async schedule(id: number) {
-    this.todoScheduled.emit(id);
+    await this.todoService.updateTodo(id, { reviewedAt: new Date(), scheduled: true });
   }
 
   async postpone(id: number) {
-    this.todoPostponed.emit(id);
+    await this.todoService.postponeTodo(id);
   }
 
   getReviewDate(todo: Todo) {
