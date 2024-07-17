@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { openDB } from 'idb';
 
-interface Todo {
+export interface Todo {
   id: number,
   title: string,
   createdAt: Date,
@@ -72,13 +72,12 @@ export class AppComponent {
   }
 
   async schedule(id: number) {
-    const now = Date.now();
     const tx = (await this.db).transaction('todos', 'readwrite');
     const store = tx.objectStore('todos');
 
     const todo: Todo = await store.get(id);
 
-    todo.reviewedAt = new Date(now);
+    todo.reviewedAt = new Date();
     todo.scheduled = true;
 
     await store.put(todo);
@@ -87,13 +86,12 @@ export class AppComponent {
   }
 
   async deschedule(id: number) {
-    const now = Date.now();
     const tx = (await this.db).transaction('todos', 'readwrite');
     const store = tx.objectStore('todos');
 
     const todo: Todo = await store.get(id);
 
-    todo.reviewedAt = new Date(now);
+    todo.reviewedAt = new Date();
     todo.reviewAt = new Date(new Date().setDate(new Date().getDate() + 1));
     todo.scheduled = false;
 
@@ -176,7 +174,11 @@ export class AppComponent {
     reader.onload = async (e) => {
       const data = e.target?.result as string;
 
-      const todos: Todo[] = JSON.parse(data);
+      const todos = JSON.parse(data, (key, value) => {
+        const dates = ['reviewAt', 'reviewedAt', 'createdAt'];
+
+        return dates.includes(key) ? new Date(value) : value;
+      }) as Todo[];
 
       const tx = (await this.db).transaction('todos', 'readwrite');
       const store = tx.objectStore('todos');
@@ -196,19 +198,19 @@ export class AppComponent {
   }
 
   determineNextReview(todo: Todo) {
-    const now = Date.now();
-
-    const elapsed = now - todo.reviewedAt.getTime();
+    const elapsed = todo.reviewAt.getTime() - todo.reviewedAt.getTime();
 
     const elapsedDays = elapsed / 1000 / 3600 / 24;
 
-    if (elapsedDays > 1) {
-      return new Date(now + (elapsed * 2));
+    if (elapsedDays >= 1) {
+      const timestamp = Date.now() + (elapsed * 2);
+
+      return new Date(timestamp);
     }
 
-    const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+    const tomorrow = new Date().setDate(new Date().getDate() + 1);
 
-    return tomorrow;
+    return new Date(tomorrow);
   }
 
   private async getTodosForToday() {
@@ -216,7 +218,6 @@ export class AppComponent {
     const store = tx.objectStore('todos');
 
     const index = store.index('reviewAt');
-
 
     const now = new Date();
 
@@ -229,7 +230,7 @@ export class AppComponent {
 
     const range = IDBKeyRange.upperBound(reviewDate, true);
 
-    const todos = await index.getAll(range)
+    const todos = await index.getAll(range);
 
     return todos.filter(todo => !todo.scheduled && !todo.completed);
   }
