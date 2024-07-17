@@ -112,8 +112,8 @@ describe('TodoService', () => {
 
       await service.getTodosForToday();
 
-      const index = databaseService.getAll.calls.argsFor(0)[0]?.index;
-      const value = databaseService.getAll.calls.argsFor(0)[0]?.value as IDBKeyRange;
+      const index = databaseService.getAll.calls.mostRecent().args[0]?.index;
+      const value = databaseService.getAll.calls.mostRecent().args[0]?.value as IDBKeyRange;
 
       const today = new Date(new Date().toDateString());
       const tomorrow = new Date(today.setDate(today.getDate() + 1));

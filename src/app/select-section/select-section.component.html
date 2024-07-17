@@ -3,8 +3,8 @@
 <div>
     <p>Do you want to do the following?</p>
     <h3>"{{todo.title}}"</h3>
-    <button (click)="schedule(todo.id)" class="schedule" tabindex="3"><b>Yes</b></button>
-    <button (click)="postpone(todo.id)" class="postpone" tabindex="4"><b>Ask again</b>
+    <button (click)="schedule(todo.id)" class="schedule"><b>Yes</b></button>
+    <button (click)="postpone(todo.id)" class="postpone"><b>Ask again</b>
         ({{getReviewDate(todo)}})</button>
 </div>
 }

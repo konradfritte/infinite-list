@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CollectSectionComponent } from './collect-section/collect-section.component';
 import { SelectSectionComponent } from './select-section/select-section.component';
@@ -30,6 +30,12 @@ export interface Todo {
 })
 export class AppComponent {
 
+  currentView = signal<string>('collect');
+
   constructor() {
+  }
+
+  show(view: string) {
+    this.currentView.set(view);
   }
 }

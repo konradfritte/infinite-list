@@ -2,9 +2,12 @@
 @if (todos().length) {
 <ul>
   @for (todo of todos(); track todo.id) {
-  <li>{{todo.title}}
-    <button (click)="complete(todo.id)">Complete</button>
-    <button (click)="postpone(todo.id)">Postpone</button>
+  <li>
+    <div>
+      <span>{{todo.title}}</span>
+      <button (click)="complete(todo.id)" class="complete">Complete</button>
+      <button (click)="postpone(todo.id)" class="postpone">Postpone</button>
+    </div>
   </li>
   }
 </ul>

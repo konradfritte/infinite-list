@@ -3,16 +3,78 @@
 
 :host {
     @include section();
-}
 
-button {
-    @include button();
-
-    &:last-of-type {
-        margin-left: 4px;
+    @media screen and (min-width: 1200px) {
+        grid-template-rows: max-content 1fr;
     }
 }
 
 ul {
-    height: 75%;
+    padding-left: 16px;
+    max-height: 100%;
+    overflow: auto;
+
+    list-style: none;
+
+    li {
+        border: 1px solid $color-border;
+
+        margin: 16px 0;
+
+        > div {
+            padding: 12px 16px;
+
+            display: grid;
+            grid-template-rows: 1fr max-content;
+
+            grid-template-areas:
+                "todo todo"
+                "complete postpone";
+
+            column-gap: 8px;
+            row-gap: 8px;
+
+            span {
+                grid-area: todo;
+            }
+
+            button {
+                @include button();
+
+                &.completed {
+                    grid-area: complete;
+                }
+
+                &.postpone {
+                    grid-area: postpone;
+                }
+
+            }
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        list-style: initial;
+        padding-left: 40px;
+
+        li {
+            border: unset;
+
+            margin: 8px 0;
+
+            div {
+                padding: unset;
+
+                grid-template-columns: 1fr max-content max-content;
+                grid-template-rows: auto;
+
+                grid-template-areas: "todo complete postpone";
+
+                button {
+                    height: max-content;
+                }
+            }
+        }
+
+    }
 }

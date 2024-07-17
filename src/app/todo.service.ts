@@ -79,7 +79,7 @@ export class TodoService {
 
     const todos = await this.databaseService.getAll(query);
 
-    return todos.filter(todo => !todo.scheduled && !todo.completed);
+    return !!todos ? todos.filter(todo => !todo.scheduled && !todo.completed) : [];
   }
 
   async postponeTodo(id: number) {
