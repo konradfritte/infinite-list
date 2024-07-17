@@ -2,6 +2,10 @@ import { Component, ElementRef, computed, signal, viewChild } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TodoService } from './todo.service';
+import { CollectSectionComponent } from './collect-section/collect-section.component';
+import { SelectSectionComponent } from './select-section/select-section.component';
+import { ReviewSectionComponent } from './review-section/review-section.component';
+import { HeaderComponent } from './header/header.component';
 
 export interface Todo {
   id: number,
@@ -18,7 +22,11 @@ export interface Todo {
   standalone: true,
   imports: [
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CollectSectionComponent,
+    SelectSectionComponent,
+    ReviewSectionComponent,
+    HeaderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -43,12 +51,10 @@ export class AppComponent {
     this.synchronizeWithDatabase();
   }
 
-  async addTodo() {
-    await this.todoService.addTodo(this.form.value)
+  async addTodo(form: FormGroup) {
+    await this.todoService.addTodo(form.value);
 
     this.synchronizeWithDatabase();
-
-    this.form.reset();
   }
 
   async schedule(id: number) {
@@ -89,17 +95,11 @@ export class AppComponent {
     dialog.showModal();
   }
 
-  async export() {
-    navigator.clipboard.writeText(this.exportData());
+  async export(data: string) {
+    navigator.clipboard.writeText(data);
   }
 
-  async import(event: any) {
-    const file: File = event.target.files[0];
-
-    if (!file) {
-      return;
-    }
-
+  async import(file: File) {
     const reader = new FileReader();
 
     reader.onload = async (e) => {

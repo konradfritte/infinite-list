@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+$color-text: #333333;
+$color-border: #c2c0c0;
+$color-background: #ffffff;
+
+$font-family: "Courier New", Courier, monospace;
+
+@mixin button {
+    padding: 4px 8px;
+
+    border: 1px solid $color-border;
+
+    background-color: white;
+    box-shadow: none;
+
+    font-family: $font-family;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-border;
+    }
+}
+
+@mixin section {
+    padding: 32px;
+
+    h2 {
+        color: $color-text;
+        font-family: $font-family;
+    }
+
+    ul {
+        margin-top: 32px;
+
+        li {
+            padding: 4px 0;
+
+            font-family: $font-family;
+
+            &:last-of-type {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

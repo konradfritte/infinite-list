@@ -1,0 +1,11 @@
+<h1>Infinite List</h1>
+<input (change)="import($event)" type="file" id="file" accept=".json" class="import">
+<label for="file" tabindex="0">Import Data</label>
+<button (click)="showDialog()">Export Data</button>
+<dialog #dialog>
+  <div>
+    <button autofocus (click)="hideDialog()">Close</button>
+    <pre>{{exportData()}}</pre>
+    <button (click)="export()">Export to clipboard</button>
+  </div>
+</dialog>

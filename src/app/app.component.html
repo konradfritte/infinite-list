@@ -1,80 +1,10 @@
-<header>
-  <h1>Infinite List</h1>
-  <input (change)="import($event)" type="file" id="file" accept=".json" class="import">
-  <label for="file" tabindex="0">Import Data</label>
-  <button (click)="showDialog(true)">Export Data</button>
-  <dialog #dialog>
-    <div>
-      <button autofocus (click)="showDialog(false)">Close</button>
-      <pre>{{exportData()}}</pre>
-      <button (click)="export()">Export to clipboard</button>
-    </div>
-  </dialog>
+<app-header [todos]="todos()" (dataImported)="import($event)" (dataExported)="export($event)"></app-header>
 
-  <dialog #importDialog>
-    <div>
-      <button autofocus (click)="showDialog(false)">Close</button>
-      <button (click)="export()">Copy to clipboard</button>
-    </div>
-  </dialog>
-</header>
-<div class="collect-section">
-  <h2>Collect</h2>
+<app-collect-section [todos]="todos()" (todoAdded)="addTodo($event)"
+  (todoRemoved)="remove($event)"></app-collect-section>
 
-  <form [formGroup]="form" (ngSubmit)="addTodo()">
-    <input type="text" formControlName="title" tabindex="1">
-    <input [disabled]="form.invalid" type="submit" value="Add Idea" tabindex="2">
-  </form>
+<app-select-section [todos]="todos()" [todosForToday]="todosForToday()" (todoScheduled)="schedule($event)"
+  (todoPostponed)="postpone($event)"></app-select-section>
 
-  <ul>
-    @for (todo of todos(); track todo.id) {
-    <li [class.completed]="todo.completed">
-      <span>{{todo.title}} @if (todo.completed) { (done) }</span>
-      <button (click)="remove(todo.id)">Delete</button>
-    </li>
-    }
-  </ul>
-</div>
-<div class="select-section">
-  <h2>Select</h2>
-  @if (reviewTodo(); as todo) {
-  <div>
-    <p>Do you want to do the following?</p>
-    <h3>"{{todo.title}}"</h3>
-    <button (click)="schedule(todo.id)" class="schedule" tabindex="3"><b>Yes</b></button>
-    <button (click)="postpone(todo.id)" class="postpone" tabindex="4"><b>Ask again</b>
-      ({{nextReviewDate()}})</button>
-  </div>
-  }
-  @else if(todos().length) {
-  <h3>All ideas reviewed!</h3>
-  }
-  @else {
-  <h3>Add some ideas to your infinite list!</h3>
-  }
-
-  <ul>
-    @for (todo of todosForToday(); track todo.id) {
-    @if (!$first) {
-    <li>{{todo.title}}</li>
-    }
-    }
-  </ul>
-
-</div>
-<div class="review-section">
-  <h2>Do</h2>
-  @if (scheduledTodos().length) {
-  <ul>
-    @for (todo of scheduledTodos(); track todo.id) {
-    <li>{{todo.title}}
-      <button (click)="complete(todo.id)">Complete</button>
-      <button (click)="postpone(todo.id)">Postpone</button>
-    </li>
-    }
-  </ul>
-  }
-  @else {
-  <h3>Select some ideas for today!</h3>
-  }
-</div>
+<app-review-section [todos]="scheduledTodos()" (todoCompleted)="complete($event)"
+  (todoPostponed)="postpone($event)"></app-review-section>

@@ -1,0 +1,54 @@
+@import '../../styles';
+
+:host {
+    @include section();
+}
+
+div {
+    padding: 16px;
+
+    display: grid;
+    grid-template-areas:
+        "a a"
+        "b b"
+        "c d";
+    gap: 8px;
+
+    border: 2px solid $color-text;
+
+    p {
+        grid-area: a;
+        font-family: $font-family;
+    }
+
+    h3 {
+        grid-area: b;
+        font-family: $font-family;
+        text-align: center;
+    }
+
+    button {
+        @include button();
+
+        &.schedule {
+            grid-area: c;
+        }
+
+        &.postpone {
+            grid-area: d;
+        }
+
+        &:hover {
+            background-color: $color-text;
+            color: $color-background;
+        }
+    }
+}
+
+ul {
+    height: 25%;
+
+    overflow: hidden;
+
+    opacity: 0.5;
+}

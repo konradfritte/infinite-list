@@ -1,0 +1,24 @@
+<h2>Select</h2>
+@if (reviewTodo(); as todo) {
+<div>
+    <p>Do you want to do the following?</p>
+    <h3>"{{todo.title}}"</h3>
+    <button (click)="schedule(todo.id)" class="schedule" tabindex="3"><b>Yes</b></button>
+    <button (click)="postpone(todo.id)" class="postpone" tabindex="4"><b>Ask again</b>
+        ({{getReviewDate(todo)}})</button>
+</div>
+}
+@else if(todos().length) {
+<h3>All ideas reviewed!</h3>
+}
+@else {
+<h3>Add some ideas to your infinite list!</h3>
+}
+
+<ul>
+    @for (todo of todosForToday(); track todo.id) {
+    @if (!$first) {
+    <li>{{todo.title}}</li>
+    }
+    }
+</ul>

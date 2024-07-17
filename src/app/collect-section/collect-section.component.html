@@ -1,0 +1,15 @@
+<h2>Collect</h2>
+
+<form [formGroup]="form" (ngSubmit)="addTodo()">
+  <input type="text" formControlName="title" tabindex="1">
+  <input [disabled]="form.invalid" type="submit" value="Add Idea" tabindex="2">
+</form>
+
+<ul>
+  @for (todo of todos(); track todo.id) {
+  <li [class.completed]="todo.completed">
+    <span>{{todo.title}} @if (todo.completed) { (done) }</span>
+    <button (click)="remove(todo.id)">Delete</button>
+  </li>
+  }
+</ul>

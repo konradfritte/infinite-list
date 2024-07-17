@@ -1,0 +1,74 @@
+@import '../../styles';
+
+:host {
+    display: grid;
+    grid-template-columns: 1fr repeat(2, max-content);
+    gap: 16px;
+
+    align-items: center;
+}
+
+h1 {
+    color: $color-text;
+    font-family: $font-family;
+}
+
+button,
+input[type="submit"],
+label {
+    @include button();
+}
+
+button {
+    height: max-content;
+
+    padding: 8px 12px;
+    margin-right: 16px;
+
+    align-self: center;
+}
+
+dialog {
+    padding: 16px;
+
+    border: 1px solid $color-border;
+
+    div {
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: max-content 1fr max-content;
+        gap: 16px;
+
+        button {
+            width: max-content;
+            justify-self: end;
+
+            margin: 0;
+        }
+
+        pre {
+            padding: 16px;
+            margin: 0;
+
+            border: 1px solid $color-border;
+
+            overflow-y: auto;
+        }
+    }
+
+    width: 50%;
+    height: 70%;
+}
+
+.import {
+    display: none;
+
+    & + label {
+
+        font-size: 13.33px;
+        padding: 8px;
+        height: max-content;
+    }
+}
