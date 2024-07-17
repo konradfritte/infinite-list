@@ -1,33 +1,97 @@
+$color-text: #333333;
+$color-border: #c2c0c0;
+$color-background: #ffffff;
+
 :host {
     font-family: 'Courier New', Courier, monospace;
     // font-family: 'Times New Roman', Times, serif;
 
     button,
-    input[type="submit"] {
-        box-shadow: none;
-
+    input[type="submit"],
+    label {
         padding: 4px 8px;
 
-        font-family: 'Courier New', Courier, monospace;
+        border: 1px solid $color-border;
 
         background-color: white;
+        box-shadow: none;
 
-        border: 1px solid lightgrey;
+        font-family: 'Courier New', Courier, monospace;
 
         cursor: pointer;
 
         &:hover {
-            background-color: lightgrey;
+            background-color: $color-border;
         }
     }
 
     input[type="text"] {
-        border: 1px solid lightgrey;
+        border: 1px solid $color-border;
     }
 
+    dialog {
+        padding: 16px;
 
-    h1 {
-        color: darkgrey;
+        border: 1px solid $color-border;
+
+        div {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: max-content 1fr;
+            gap: 16px;
+
+            button {
+                width: max-content;
+                justify-self: end;
+
+                margin: 0;
+            }
+
+            pre {
+                padding: 16px;
+                margin: 0;
+
+                border: 1px solid $color-border;
+
+                overflow-y: auto;
+            }
+        }
+
+        width: 50%;
+        max-height: 70%;
+    }
+
+    .import {
+        display: none;
+
+        & + label {
+
+            font-size: 13.33px;
+            padding: 8px;
+            height: max-content;
+        }
+    }
+
+    header {
+        display: grid;
+
+        grid-template-columns: 1fr repeat(2, max-content);
+        gap: 16px;
+
+        align-items: center;
+
+        h1 {
+            color: $color-text;
+        }
+
+        button {
+            height: max-content;
+
+            padding: 8px 12px;
+            margin-right: 16px;
+
+            align-self: center;
+        }
     }
 
     main {
@@ -37,7 +101,7 @@
 
         display: grid;
 
-        border-top: 1px solid lightgrey;
+        border-top: 1px solid $color-border;
 
         grid-template-columns: repeat(3, 1fr);
         // gap: 16px;
@@ -47,10 +111,10 @@
 
             overflow-y: auto;
 
-            border-right: 1px solid lightgrey;
+            border-right: 1px solid $color-border;
 
             h2 {
-                color: grey;
+                color: $color-text;
             }
 
             li {
@@ -68,31 +132,20 @@
                     text-decoration: line-through;
                     opacity: 0.5;
                 }
-
-                // button {
-                //     border-color: lightcoral;
-                //     background-color: lightcoral;
-                // }
             }
 
             &.select-section {
                 div {
                     padding: 16px;
 
-                    // border: 2px solid blue;
-                    // box-shadow: 2px 2px blue;
-
-                    border: 2px solid grey;
-                    box-shadow: 2px 2px grey;
-
                     display: grid;
-
                     grid-template-areas:
                         "a a"
                         "b b"
                         "c d";
-
                     gap: 8px;
+
+                    border: 2px solid $color-text;
 
                     p {
                         grid-area: a;
@@ -110,26 +163,21 @@
                     }
 
                     button {
-                        // border: 1px solid blue;
-                        // color: blue;
-
-                        border: 1px solid grey;
+                        border: 1px solid $color-text;
+                        font-weight: bold;
 
                         &.schedule {
                             grid-area: c;
-
-                            font-weight: bold;
                         }
 
                         &.postpone {
                             grid-area: d;
 
-                            font-weight: bold;
                         }
 
                         &:hover {
-                            background-color: grey;
-                            color: white;
+                            background-color: $color-text;
+                            color: $color-background;
                         }
                     }
                 }
@@ -138,6 +186,12 @@
                     margin-top: 32px;
 
                     opacity: 0.5;
+                }
+            }
+
+            &.review-section {
+                button:last-of-type {
+                    margin-left: 4px;
                 }
             }
         }
