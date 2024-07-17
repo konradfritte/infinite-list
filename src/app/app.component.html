@@ -7,7 +7,7 @@
     <div>
       <button autofocus (click)="showDialog(false)">Close</button>
       <pre>{{exportData()}}</pre>
-      <button (click)="export()">Copy to clipboard</button>
+      <button (click)="export()">Export to clipboard</button>
     </div>
   </dialog>
 
@@ -26,6 +26,7 @@
       <input type="text" formControlName="title" tabindex="1">
       <input [disabled]="form.invalid" type="submit" value="Add Idea" tabindex="2">
     </form>
+
     <ul>
       @for (todo of todos(); track todo.id) {
       <li [class.completed]="todo.completed">
@@ -40,9 +41,10 @@
     @if (reviewTodo(); as todo) {
     <div>
       <p>Do you want to do the following?</p>
-      <h3>{{todo.title}}</h3>
-      <button (click)="schedule(todo.id)" class="schedule" tabindex="3">Yes</button>
-      <button (click)="postpone(todo.id)" class="postpone" tabindex="4">No</button>
+      <h3>"{{todo.title}}"</h3>
+      <button (click)="schedule(todo.id)" class="schedule" tabindex="3"><b>Yes</b></button>
+      <button (click)="postpone(todo.id)" class="postpone" tabindex="4"><b>Ask again</b>
+        ({{determineNextReview(todo).toLocaleDateString()}})</button>
     </div>
     }
     @else if(todos().length) {

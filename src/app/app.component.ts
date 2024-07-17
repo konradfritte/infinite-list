@@ -103,19 +103,13 @@ export class AppComponent {
   }
 
   async postpone(id: number) {
-    const now = Date.now();
-
     const tx = (await this.db).transaction('todos', 'readwrite');
     const store = tx.objectStore('todos');
 
     const todo: Todo = await store.get(id);
 
-    const elapsed = now - todo.reviewedAt.getTime();
-
-    const elapsedDays = elapsed / 1000 / 3600 / 24;
-
-    todo.reviewedAt = new Date(now);
-    todo.reviewAt = elapsedDays > 1 ? new Date(now + (elapsed * 2)) : new Date(new Date().setDate(new Date().getDate() + 1));
+    todo.reviewAt = this.determineNextReview(todo);
+    todo.reviewedAt = new Date();
 
     await store.put(todo);
 
@@ -201,6 +195,22 @@ export class AppComponent {
     reader.readAsText(file);
   }
 
+  determineNextReview(todo: Todo) {
+    const now = Date.now();
+
+    const elapsed = now - todo.reviewedAt.getTime();
+
+    const elapsedDays = elapsed / 1000 / 3600 / 24;
+
+    if (elapsedDays > 1) {
+      return new Date(now + (elapsed * 2));
+    }
+
+    const tomorrow = new Date(new Date().setDate(new Date().getDate() + 1));
+
+    return tomorrow;
+  }
+
   private async getTodosForToday() {
     const tx = (await this.db).transaction('todos', 'readonly');
     const store = tx.objectStore('todos');
@@ -210,21 +220,14 @@ export class AppComponent {
 
     const now = new Date();
 
-    const lower = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      0
-    );
-
-    const upper = new Date(
+    const reviewDate = new Date(
       now.getFullYear(),
       now.getMonth(),
       now.getDate(),
       24
-    )
+    );
 
-    const range = IDBKeyRange.bound(lower, upper);
+    const range = IDBKeyRange.upperBound(reviewDate, true);
 
     const todos = await index.getAll(range)
 
