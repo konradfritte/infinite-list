@@ -1,10 +1,10 @@
 # Infinite List
 
-This  is a personal project to help me keep track of things I need or want to do. It is very common for me to postpone ideas or to-dos to a later time, just to forget  them immediately afterward. Usually, one would use to-do lists as memory aids to overcome this issue. However, hey do not work for me. They soon become too large for me to actually oversee them. This is the point where I stop maintaining them properly, and eventually avoid them completely.
+This  is a personal project to help me keep track of things I need or want to do. It is very common for me to postpone ideas or to-dos to a later time, just to forget  them immediately afterward. Usually, one would use to-do lists as memory aids to overcome this issue. However, they do not work for me. My lists soon become too large for me to actually oversee them. This is the point where I stop maintaining them properly, and eventually avoid them completely.
 
 To help me get a better grip of my to-dos and ideas, I adopted a basic review schedule. It is somewhat inspired by Spaced Repetition tools (Anki, SuperMemo, Writing Inboxes). The mechanism is quite simple:
 - You add all sort of new ideas to your infinte list.
-- Each day, you get to review your infinite list: For each item, you can decide whether you want to schedule or postpone it.
+- Each day, you get to review your infinite list: For each item, you can decide whether you actually want to schedule or postpone it.
 - Each time you postpone an item, it's review interval is doubled. Each time you schedule an item, its review interval is reset again.
 
 Therefore, you can add a very large amount of entries to your list and will still be able to oversee them all: Relevant items will be shown in the near future. Irrelevant things will be postponed to the very far future.
