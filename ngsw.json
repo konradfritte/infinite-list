@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1721160887615,
+  "timestamp": 1721161413575,
   "index": "/infinite-list/index.html",
   "assetGroups": [
     {
@@ -59,7 +59,7 @@
     "/infinite-list/icons/icon-transparent.svg": "87b89c04ca4ad7dd0ef15d52f2dd0d14567574e5",
     "/infinite-list/index.html": "ac968ec476dfe60a4d9c36a845a52e7a0a58e861",
     "/infinite-list/main-S4B5MRBR.js": "e8481e7de14d27dc1053fab1b854b88c88528a3c",
-    "/infinite-list/manifest.webmanifest": "70fe334f06a98995fe9bb1616e334a42e81c51b3",
+    "/infinite-list/manifest.webmanifest": "4ba54638eeb0d61cf07e8d014469a7b165717d52",
     "/infinite-list/polyfills-6EAL64PA.js": "d874147a12a6570d9b44e99935e9de8b7f3cabbc",
     "/infinite-list/styles-TAZMSP2Z.css": "a36c1c732510cc4b48afc5a654029d0a45deab76"
   },
