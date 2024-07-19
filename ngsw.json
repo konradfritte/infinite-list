@@ -1,0 +1,79 @@
+{
+  "configVersion": 1,
+  "timestamp": 1720982162264,
+  "index": "/infinite-list/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/infinite-list/favicon.ico",
+        "/infinite-list/index.html",
+        "/infinite-list/main-S4B5MRBR.js",
+        "/infinite-list/manifest.webmanifest",
+        "/infinite-list/polyfills-6EAL64PA.js",
+        "/infinite-list/styles-TAZMSP2Z.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/infinite-list/icons/icon-128x128.png",
+        "/infinite-list/icons/icon-144x144.png",
+        "/infinite-list/icons/icon-152x152.png",
+        "/infinite-list/icons/icon-192x192.png",
+        "/infinite-list/icons/icon-384x384.png",
+        "/infinite-list/icons/icon-512x512.png",
+        "/infinite-list/icons/icon-72x72.png",
+        "/infinite-list/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/infinite-list/favicon.ico": "7411f45a591a3da93567f59183c5781a3c6078bd",
+    "/infinite-list/icons/icon-128x128.png": "9d1b3764c3fadf09818ac30002391dbfdbfad511",
+    "/infinite-list/icons/icon-144x144.png": "6f41dc572dbce733acdf3ecf6429d945993e2919",
+    "/infinite-list/icons/icon-152x152.png": "1a2d3e98adfbe937b291ccb3c164b24afe64a8e1",
+    "/infinite-list/icons/icon-192x192.png": "d12b5532f6bfaf8414aa5e6895922be60965aacb",
+    "/infinite-list/icons/icon-384x384.png": "58437979b29648f4ae55b7e8ddc8e3e3a1af443f",
+    "/infinite-list/icons/icon-512x512.png": "159e81ccd5203057fa3608b32f35e787d4550433",
+    "/infinite-list/icons/icon-72x72.png": "6e9f3637dedc508e512bdee52f2b692d7872683f",
+    "/infinite-list/icons/icon-96x96.png": "26386f9f899992c44a04b32c1117b8a72807d6ee",
+    "/infinite-list/index.html": "5f31c56a2b908a91f058881251da2516d1b3ce88",
+    "/infinite-list/main-S4B5MRBR.js": "e8481e7de14d27dc1053fab1b854b88c88528a3c",
+    "/infinite-list/manifest.webmanifest": "80fc93778c351012c7a3a08c2e2c92c6d6410f21",
+    "/infinite-list/polyfills-6EAL64PA.js": "d874147a12a6570d9b44e99935e9de8b7f3cabbc",
+    "/infinite-list/styles-TAZMSP2Z.css": "a36c1c732510cc4b48afc5a654029d0a45deab76"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
