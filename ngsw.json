@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1721146639493,
+  "timestamp": 1721160887615,
   "index": "/infinite-list/index.html",
   "assetGroups": [
     {
@@ -34,7 +34,6 @@
         "/infinite-list/icons/icon-152x152.png",
         "/infinite-list/icons/icon-192x192.png",
         "/infinite-list/icons/icon-384x384.png",
-        "/infinite-list/icons/icon-48x48.png",
         "/infinite-list/icons/icon-512x512.png",
         "/infinite-list/icons/icon-72x72.png",
         "/infinite-list/icons/icon-96x96.png",
@@ -46,14 +45,13 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/infinite-list/favicon.ico": "7411f45a591a3da93567f59183c5781a3c6078bd",
+    "/infinite-list/favicon.ico": "f017438ddde89111a98f432b549702d2dd05abcd",
     "/infinite-list/icons/icon-1024x1024.png": "c5b52890600f167624c3335ea524ca66dd71cd2b",
     "/infinite-list/icons/icon-128x128.png": "4d3b4dc4456a0aa02a166c78e68f933ed4645ccb",
     "/infinite-list/icons/icon-144x144.png": "57d228296fba7e5eb086fe5803d0706c0a23469a",
     "/infinite-list/icons/icon-152x152.png": "696593362dd120426b6c6db78f7ef9dd0abf1273",
     "/infinite-list/icons/icon-192x192.png": "b44af0e801e26468c653028cca6a3d444871911c",
     "/infinite-list/icons/icon-384x384.png": "98b155503c338ccd4c0c844cc146eed738ea5632",
-    "/infinite-list/icons/icon-48x48.png": "492620b4d03180b473ac8071f1a7d3a9b854b1bc",
     "/infinite-list/icons/icon-512x512.png": "0c1073f39922886ec375b395339b19a1a57ef421",
     "/infinite-list/icons/icon-72x72.png": "423045a709867d1dce657b2f49b36869b51c86c4",
     "/infinite-list/icons/icon-96x96.png": "989da3b6c0c3f5e5dc33ea826efc3367e2cdbe38",
@@ -61,7 +59,7 @@
     "/infinite-list/icons/icon-transparent.svg": "87b89c04ca4ad7dd0ef15d52f2dd0d14567574e5",
     "/infinite-list/index.html": "ac968ec476dfe60a4d9c36a845a52e7a0a58e861",
     "/infinite-list/main-S4B5MRBR.js": "e8481e7de14d27dc1053fab1b854b88c88528a3c",
-    "/infinite-list/manifest.webmanifest": "762cc309633152a987a08c921c1c0f446458f356",
+    "/infinite-list/manifest.webmanifest": "70fe334f06a98995fe9bb1616e334a42e81c51b3",
     "/infinite-list/polyfills-6EAL64PA.js": "d874147a12a6570d9b44e99935e9de8b7f3cabbc",
     "/infinite-list/styles-TAZMSP2Z.css": "a36c1c732510cc4b48afc5a654029d0a45deab76"
   },
